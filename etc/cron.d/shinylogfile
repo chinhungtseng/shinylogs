@@ -1,0 +1,1 @@
+*/1 * * * * root /bin/bash /root/bin/shinylog/shinyAppsLog.sh &> /dev/null
