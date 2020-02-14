@@ -28,7 +28,7 @@ fi
 # 1.檢查所需指令是否存在與shiny服務是否啟動
 
 # 檢查所需指令
-tools="awk grep cut netstat top"
+tools="awk sed grep cut netstat top"
 allExist="true"
 for tool in $tools; do
 	which $tool > /dev/null 2>&1
@@ -67,7 +67,7 @@ function outputLog(){
 	# 抓出 app 名稱
 	apps=$(lsof -p "$1" | grep "$deployDir" | awk '{print $9}' | awk '{FS="/"} {print $6}' | uniq)	
 	
-	output="$datetime $apps $infos $users"
+	output="$datetime ${apps:-noApps} $infos $users"
 	echo $output | sed 's/ /,/2g' >> $basefile 2>/dev/null
 }
 
