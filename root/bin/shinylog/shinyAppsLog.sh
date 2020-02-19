@@ -65,7 +65,7 @@ function outputLog(){
 	infos=$(top -b -n1 -p "$1" | tail -1)
 	datetime=$(date +"%Y/%m/%d %H:%M:%S")
 	# 抓出 app 名稱
-	apps=$(lsof -p "$1" | grep "$deployDir" | awk '{print $9}' | awk '{FS="/"} {print $6}' | uniq)	
+	apps=$(lsof -p "$1" | grep "$deployDir" | awk '{print $9}' | cut -d '/' -f6 | sort | uniq)	
 	
 	output="$datetime ${apps:-noApps} $infos $users"
 	echo $output | sed 's/ /,/2g' >> $basefile 2>/dev/null
